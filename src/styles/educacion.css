@@ -1,0 +1,50 @@
+.education-container {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.education-card {
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.education-title {
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Agregamos un span alrededor del emoji para animarlo */
+.education-title .hat {
+    display: inline-block;
+    transition: transform 3s ease-in-out;
+    font-size: 3em;
+}
+
+/* Definimos la animación */
+@keyframes rotateHat {
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+/* Cuando la sección es visible, el birrete gira */
+.education-title.visible .hat {
+    animation: rotateHat 2s linear infinite;
+    display: inline-block;
+    transform-origin: center;
+}
+
+.education-subtitle {
+    font-size: 18px;
+    color: #666;
+}
+
+.education-text {
+    font-size: 16px;
+    color: #444;
+}

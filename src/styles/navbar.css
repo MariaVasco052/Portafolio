@@ -1,0 +1,41 @@
+/* Estilos generales del Navbar */
+.nav {
+    background: linear-gradient(135deg, #007bff, #6610f2); /* Degradado azul a morado */
+    padding: 15px 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  /* Estilo de los enlaces */
+  .nav .nav-link {
+    color: white !important;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Efecto hover */
+  .nav .nav-link:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+  }
+  
+  /* Estilo del enlace activo */
+  .nav .nav-link.active {
+    background: rgba(255, 255, 255, 0.5);
+    font-weight: bold;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .nav {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  
