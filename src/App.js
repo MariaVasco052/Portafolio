@@ -2,8 +2,8 @@ import React from 'react';
 import './styles/App.css';
 import Navbar from './components/Navbar'; // Importa el Navbar
 import FotoHV from './images/FotoHV.png'; // Importamos la foto de perfil
-import Educacion from './components/Educacion'; // Importa el componente Educacion
 import Sobremi from './components/Sobremi';
+
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
       <main>
         <section id="home">
           <p className="Inicio">
-            Hola, soy <code className="minombre">María Alejandra Vasco</code> y este es mi portafolio.
+            Hola, soy <code className="minombre">María Alejandra Vasco Pineda</code>
           </p>
           <img src={FotoHV} className="miFoto" alt="miFoto" />
         </section>
@@ -27,8 +27,6 @@ function App() {
       {/* Usa el componente Sobremi */}
       <Sobremi/>
 
-      {/* Usa el componente Educación */}
-      <Educacion/>
 
       </main>
     </div>

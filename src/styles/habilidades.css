@@ -1,0 +1,113 @@
+/* 🎨 Títulos de las secciones */
+.skills-title, .softskills-title {
+    font-size: 1.8rem;
+    color: #ff69b4;
+    text-shadow: 2px 2px 10px rgba(255, 105, 180, 0.6);
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInDown 1s ease-out forwards;
+}
+
+/* ✨ Animación de entrada para los títulos */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 🎠 Contenedor del Carrusel */
+.carousel {
+    position: relative;
+    width: 600px; /* Ajusta según el tamaño deseado */
+    height: 100px;
+    overflow: hidden;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+/* 📦 Contenedor interno del carrusel */
+.carousel-inner {
+    display: flex;
+    width: calc(200px * 6); /* Ajusta según el número de imágenes visibles */
+    animation: slide 12s linear infinite; /* Controla la velocidad del desplazamiento */
+}
+
+/* 📷 Imágenes del carrusel */
+.carousel-inner img {
+    width: 200px;
+    height: 100px;
+    object-fit: contain; /* Mantiene la proporción de la imagen */
+    margin-right: 10px;
+}
+
+/* 🎬 Animación de desplazamiento */
+@keyframes slide {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-1200px); /* Ajusta según el ancho total */
+    }
+}
+
+
+/* 🟩 Grid de habilidades blandas */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* 🎴 Tarjetas de habilidades blandas */
+.skill-card {
+    width: 150px;
+    height: 150px;
+    perspective: 1000px;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+.skill-card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* 🏛️ Lado frontal de la tarjeta */
+.card-front, .card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.card-front {
+    background-color: #ff69b4;
+    color: white;
+}
+
+.card-back {
+    background-color: #fff;
+    color: #ff69b4;
+    transform: rotateY(180deg);
+}

@@ -1,41 +1,92 @@
-/* Estilos generales del Navbar */
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* ===== Estilos generales del Navbar ===== */
 .nav {
-    background: linear-gradient(135deg, #007bff, #6610f2); /* Degradado azul a morado */
-    padding: 15px 30px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+  padding: 35px 30px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+/* ===== Estilos de los enlaces ===== */
+ .nav-link {
+  color: white !important;
+  font-family: 'Caveat Brush', serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 10px 15px;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  transition: color 0.4s ease-in-out, border 0.4s ease-in-out;
+}
+
+/* ===== Efecto hover ===== */
+.nav .nav-link:hover {
+  font-weight: bold;
+  color: #ff69b4 !important; /* Cambia el color del texto */
+  border-color: #ff69b4; /* Cambia el borde a rosado */
+  transform: scale(1.1);
+  box-shadow: 0px 0px 25px rgba(255, 105, 180, 1); /* Resplandor rosado */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Estilo para el botón de hamburguesa */
+.hamburguesa {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* ===== Responsive (Móviles) ===== */
+@media (max-width: 768px) {  
+  .hamburguesa {
+    display: block;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 1000; /* Asegura que quede por encima del menú */
   }
-  
-  /* Estilo de los enlaces */
-  .nav .nav-link {
-    color: white !important;
-    font-size: 1.2rem;
-    font-weight: 500;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: all 0.3s ease-in-out;
+  .navbar {
+    display: none; /* Ocultar la barra de navegación en pantallas pequeñas */
   }
-  
-  /* Efecto hover */
-  .nav .nav-link:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.1);
-  }
-  
-  /* Estilo del enlace activo */
-  .nav .nav-link.active {
-    background: rgba(255, 255, 255, 0.5);
-    font-weight: bold;
-  }
-  
-  /* Responsive */
-  @media (max-width: 768px) {
-    .nav {
+    /* Estilo para el menú desplegable (hamburguesa) en vertical */
+   .hamburguesa-links {
+      display: flex;
+      flex-direction: column !important; /* Asegura que los enlaces se alineen verticalmente */
+      gap: 40px; /* Espacio entre los enlaces */
+      width: 80%; /* Asegura que ocupe todo el ancho */
+      background: black; /* Fondo del menú */
+      padding: 10px; /* Espaciado interno */
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra */
+    }
+    .hamburguesa-menu {
+      position: absolute;
+      top: 30px; /* Justo debajo del botón */
+      right: 0px;
+      left: 200px;
+      width: 200px;
       flex-direction: column;
       align-items: center;
+      z-index: 1; /* Asegura que quede por encima de los enlaces */    
     }
+
+    /* Aplica bordes rosados a cada enlace */
+    .hamburguesa-links .nav-link {
+      border: 2px solid #ff69b4;
+      border-radius: 5px;
+      padding: 8px 15px;
+      text-align: center;
+      transition: border-color 0.3s ease-in-out;
+    }
+
+    /* Efecto hover para cambiar el borde a un tono más intenso */
+    .hamburguesa-links .nav-link:hover {
+      border-color: #ff1493;
+    }
+    
   }
-  
