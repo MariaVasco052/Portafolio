@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+# Portafolio — María Alejandra Vasco (MAVP)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este repositorio contiene el sitio web de portafolio personal de María Alejandra Vasco. Está construido con React (Create React App) y pensado para mostrar experiencia, proyectos, habilidades y un formulario de contacto integrado con EmailJS.
 
-## Available Scripts
+**Resumen rápido**
 
-In the project directory, you can run:
+- Stack: React, CSS personalizado, EmailJS (@emailjs/browser)
+- Diseño: tema oscuro, fuentes Syne + DM Sans, enfoque responsive
 
-### `npm start`
+**Enlace al archivo principal:** [src/App.js](src/App.js)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Estructura principal
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- `public/` — archivos estáticos (index.html, iconos, manifest)
+- `src/` — código fuente
+  - `src/components/` — componentes React (Navbar, Contacto, Habilidades, Educacion, Sobremi, etc.)
+  - `src/styles/` — hojas de estilo CSS por sección
+  - `src/index.js`, `src/App.js` — punto de entrada y componente raíz
 
-### `npm test`
+## Requisitos
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js 16+ y npm
 
-### `npm run build`
+## Instalación y ejecución (desarrollo)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Clona el repositorio, instala dependencias y ejecuta el servidor de desarrollo:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm install
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Abre http://localhost:3000 en tu navegador.
 
-### `npm run eject`
+## Variables de entorno (EmailJS)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Para que el formulario de contacto funcione con EmailJS, crea un archivo `.env` en la raíz (ya está ignorado por git) con estas variables:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- `REACT_APP_EMAILJS_SERVICE_ID` — ID del servicio en EmailJS
+- `REACT_APP_EMAILJS_TEMPLATE_ID` — ID de la plantilla
+- `REACT_APP_EMAILJS_PUBLIC_KEY` — clave pública (antes PUBLIC_KEY)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Ejemplo `.env` (no subir al repositorio):
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```env
+REACT_APP_EMAILJS_SERVICE_ID=service_xxx
+REACT_APP_EMAILJS_TEMPLATE_ID=template_yyy
+REACT_APP_EMAILJS_PUBLIC_KEY=public_zzz
+```
 
-## Learn More
+Tras añadir las variables, reinicia el servidor de desarrollo.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Cómo funciona el formulario de contacto
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- El componente `src/components/Contacto.js` usa `@emailjs/browser` para enviar `from_name` y `message` al template configurado.
+- Solo se requieren `Nombre` y `Mensaje` en el formulario.
 
-### Code Splitting
+## Estilos y temas
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Las variables globales están en `src/styles/App.css` (colores, tipografías, `--font-size-base`).
+- Las hojas por sección están en `src/styles/`:
+  - `habilidades.css`, `educacion.css`, `sobremi.css`, `contacto.css`, `experiencia.css`, `navbar.css`.
 
-### Analyzing the Bundle Size
+## Desarrollo y pruebas
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Ejecutar linter o tests (si existen) con:
 
-### Making a Progressive Web App
+```bash
+npm test
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Despliegue
 
-### Advanced Configuration
+- Construir para producción:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+npm run build
+```
 
-### Deployment
+- El contenido preparado quedará en la carpeta `build/` listo para servir en cualquier hosting estático.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Contribuciones
 
-### `npm run build` fails to minify
+- Si quieres sugerir mejoras o corregir contenido, abre un issue o pull request. Para cambios locales: crea una rama, haz commits claros y abre PR.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Contacto
+
+- Correos:
+maria.alejandravp@hotmail.com
+maria.alejandravp93@gmail.com
+
+---

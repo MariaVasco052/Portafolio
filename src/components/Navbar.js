@@ -1,66 +1,90 @@
-import React, { useState } from 'react';
-import { Nav } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
 import '../styles/navbar.css';
 
-function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
+const NAV_LINKS = [
+  { label: 'Inicio',    href: '#home' },
+  { label: 'Sobre mí', href: '#about' },
+  { label: 'Experiencia',href: '#projects' },
+  { label: 'Contacto', href: '#contact' },
+];
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+function Navbar() {
+  const [scrolled,  setScrolled]  = useState(false);
+  const [menuOpen,  setMenuOpen]  = useState(false);
+  const [activeLink,setActiveLink]= useState('#home');
+
+  // Glassmorphism al bajar
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Cierra el menú si se hace clic fuera
+  useEffect(() => {
+    if (!menuOpen) return;
+    const close = (e) => {
+      if (!e.target.closest('.navbar-container')) setMenuOpen(false);
+    };
+    document.addEventListener('click', close);
+    return () => document.removeEventListener('click', close);
+  }, [menuOpen]);
+
+  const handleLinkClick = (href) => {
+    setActiveLink(href);
+    setMenuOpen(false);
   };
 
   return (
-    <div className="navbar-container">
-      <Nav variant="pills" defaultActiveKey="/" className="navbar">
-        <Nav.Item>
-          <Nav.Link href="/">Inicio</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="#about">Sobre mí</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="#projects">Proyectos</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="#contact">Contacto</Nav.Link>
-        </Nav.Item>
-      </Nav>
+    <nav className={`navbar-container ${scrolled ? 'navbar--scrolled' : ''}`} role="navigation" aria-label="Navegación principal">
+      {/* Logo / Iniciales */}
+      <a href="#home" className="navbar-logo" onClick={() => handleLinkClick('#home')}>
+        MAVP<span className="navbar-logo-dot">.</span>
+      </a>
+      {/* Emoji centrado decorativo */}
+      <div className="navbar-center-emoji" aria-hidden="true">👩‍💻</div>
+      {/* Links escritorio */}
+      <ul className="navbar-links" role="list">
+        {NAV_LINKS.map(({ label, href }) => (
+          <li key={href}>
+            <a
+              href={href}
+              className={`navbar-link ${activeLink === href ? 'navbar-link--active' : ''}`}
+              onClick={() => handleLinkClick(href)}
+            >
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
 
-      {/* Botón de hamburguesa solo visible en dispositivos pequeños */}
-      <button className="hamburguesa" onClick={toggleMenu}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="30px"
-          viewBox="0 -960 960 960"
-          width="30px"
-          fill="#5f6368"
-        >
-          <path
-            d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"
-          />
-        </svg>
+      {/* Botón hamburguesa */}
+      <button
+        className={`hamburguesa ${menuOpen ? 'hamburguesa--open' : ''}`}
+        onClick={() => setMenuOpen((prev) => !prev)}
+        aria-expanded={menuOpen}
+        aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+      >
+        <span className="hamburguesa-bar" />
+        <span className="hamburguesa-bar" />
+        <span className="hamburguesa-bar" />
       </button>
 
-      {/* Menú desplegable */}
-      {menuOpen && (
-        <div className="hamburguesa-menu">
-          <Nav className="hamburguesa-links">
-            <Nav.Item>
-              <Nav.Link href="/">Inicio</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link href="#about">Sobre mí</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link href="#projects">Proyectos</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link href="#contact">Contacto</Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </div>
-      )}
-    </div>
+      {/* Menú móvil */}
+      <div className={`mobile-menu ${menuOpen ? 'mobile-menu--open' : ''}`} aria-hidden={!menuOpen}>
+        {NAV_LINKS.map(({ label, href }) => (
+          <a
+            key={href}
+            href={href}
+            className={`mobile-menu-link ${activeLink === href ? 'mobile-menu-link--active' : ''}`}
+            onClick={() => handleLinkClick(href)}
+            tabIndex={menuOpen ? 0 : -1}
+          >
+            {label}
+          </a>
+        ))}
+      </div>
+    </nav>
   );
 }
 

@@ -1,86 +1,150 @@
-import React, { useState, useEffect } from "react";
-import "../styles/habilidades.css";
+import React, { useState, useEffect, useRef } from 'react';
+import '../styles/habilidades.css';
 
-// Lista de imágenes del carrusel
-const habilidades = [
-    "html.png",
-    "css.png",
-    "js.png",
-    "csharp.png",
-    "java-icon.png",
-    "react.png",
-    "git.png",
-    "bootstrap.png",
-    "intellij.png",
-    "selenium.png",
-    "gradle.png",
-    "Postman.png",
-    "postgre.png",
-    "icons8-logo-de-mysql-240.png",
-    "powerbi.png",
+/* ─────────────────────────────────────────────────────────
+   SKILLS — organizadas por categoría QA
+   Nota: agrega los íconos que no tengas a /public/icons/
+   Sugerencia de fuente: https://devicons.dev  o  SVGRepo
+───────────────────────────────────────────────────────── */
+const categorias = [
+  {
+    titulo: '🧪 Automatización de Pruebas',
+    skills: [
+      { name: 'Selenium',    img: 'selenium.png' },
+      { name: 'Java',        img: 'java-icon.png' },
+      { name: 'Serenity BDD',img: 'serenity.png' },   // ← agregar ícono
+      { name: 'Karate',      img: 'karate.png' },      // ← agregar ícono
+      { name: 'Maven',       img: 'maven.png' },       // ← agregar ícono
+    ],
+  },
+  {
+    titulo: '🔌 APIs & Servicios',
+    skills: [
+      { name: 'Postman',  img: 'Postman.png' },
+      { name: 'Swagger',  img: 'swagger.png' },        // ← agregar ícono
+      { name: 'Karate',   img: 'karate.png' },
+    ],
+  },
+  {
+    titulo: '🗄️ Datos',
+    skills: [
+      { name: 'SQL',        img: 'sql.png' },          // ← agregar ícono
+      { name: 'PostgreSQL', img: 'postgre.png' },
+      { name: 'MySQL',      img: 'icons8-logo-de-mysql-240.png' },
+      { name: 'Power BI',   img: 'powerbi.png' },
+    ],
+  },
+  {
+    titulo: '🛠️ Herramientas & Dev',
+    skills: [
+      { name: 'Jira',          img: 'jira.png' },      // ← agregar ícono
+      { name: 'Azure DevOps',  img: 'azure.png' },     // ← agregar ícono
+      { name: 'Git',           img: 'git.png' },
+      { name: 'IntelliJ',      img: 'intellij.png' },
+      { name: 'Gradle',        img: 'gradle.png' },
+    ],
+  },
+  {
+    titulo: '💻 Desarrollo Web',
+    skills: [
+      { name: 'HTML',      img: 'html.png' },
+      { name: 'CSS',       img: 'css.png' },
+      { name: 'JavaScript',img: 'js.png' },
+      { name: 'React',     img: 'react.png' },
+      { name: 'Bootstrap', img: 'bootstrap.png' },
+    ],
+  },
 ];
 
-const skillsoft = [
-    { name: "Trabajo en equipo", description: "Colaboro eficazmente con otros." },
-    { name: "Comunicación efectiva", description: "Expreso ideas con claridad." },
-    { name: "Adaptabilidad", description: "Me ajusto a cambios sin problemas." },
-    { name: "Liderazgo", description: "Guío y motivo a mi equipo." },
+const habilidadesBlandas = [
+  { name: 'Atención al detalle',   desc: 'Identifico errores que otros pasan por alto.' },
+  { name: 'Comunicación asertiva', desc: 'Transmito hallazgos con claridad al equipo.' },
+  { name: 'Pensamiento analítico', desc: 'Analizo flujos y detecto causas raíz.' },
+  { name: 'Trabajo en equipo',     desc: 'Colaboro en equipos ágiles multidisciplinarios.' },
+  { name: 'Adaptabilidad',         desc: 'Me ajusto rápido a nuevas tecnologías y contextos.' },
+  { name: 'Mejora continua',       desc: 'Propongo optimizaciones en el proceso de testing.' },
 ];
 
+/* ── Hook visibilidad ── */
+function useInView(threshold = 0.1) {
+  const ref = useRef(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) setInView(true); },
+      { threshold }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return [ref, inView];
+}
+
+/* ── Componente principal ── */
 const Habilidades = () => {
-    const [currentIndex, setCurrentIndex] = useState(0);
+  const [ref, inView] = useInView();
 
-    // Efecto para cambiar de imagen automáticamente cada 3 segundos
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentIndex((prevIndex) => (prevIndex + 1) % habilidades.length);
-        }, 3000);
+  return (
+    <div className="skills-section" ref={ref}>
+      <h3 className={`skills-heading ${inView ? 'skills-heading--visible' : ''}`}>
+        Stack Técnico
+      </h3>
 
-        return () => clearInterval(interval);
-    }, []);
-
-    return (
-        <div className="skills-container">
-            <h3 className="skills-title"><code>Habilidades Técnicas</code></h3>
-            <div className="carousel">
-                <div className="carousel-inner">
-                    {habilidades.map((img, index) => (
-                        <img
-                            key={index}
-                            src={`/icons/${img}`}
-                            alt={`Habilidad ${index + 1}`}
-                            className={index === currentIndex ? "active" : "hidden"}
-                        />
-                    ))}
-                </div>
-            </div>
-
-            {/* Sección de Habilidades Blandas */}
-            <SoftSkills />
+      {/* Una grilla por categoría */}
+      {categorias.map(({ titulo, skills }, ci) => (
+        <div key={titulo} className="skills-categoria">
+          <p className="skills-categoria-label">{titulo}</p>
+          <div className="skills-grid">
+            {skills.map(({ name, img }, i) => (
+              <div
+                key={name}
+                className={`skill-card ${inView ? 'skill-card--visible' : ''}`}
+                style={{ animationDelay: `${(ci * 100) + i * 60}ms` }}
+              >
+                <img
+                  src={`/icons/${img}`}
+                  alt={name}
+                  className={`skill-card-icon ${['serenity.png', 'maven.png'].includes(img) ? 'skill-card-icon--larger' : ''}`}
+                  loading="lazy"
+                  onError={(e) => { e.target.style.display = 'none'; }}
+                />
+                <span className="skill-card-name">{name}</span>
+              </div>
+            ))}
+          </div>
         </div>
-    );
+      ))}
+
+      <SoftSkills inView={inView} />
+    </div>
+  );
 };
 
-const SoftSkills = () => {
-    return (
-        <div className="softskills-container">
-            <h3 className="softskills-title"><code>Habilidades Blandas</code></h3>
-            <div className="skills-grid">
-                {skillsoft.map((skill, index) => (
-                    <div className="skill-card" key={index}>
-                        <div className="card-inner">
-                            <div className="card-front">
-                                <p>{skill.name}</p>
-                            </div>
-                            <div className="card-back">
-                                <p>{skill.description}</p>
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
+/* ── Habilidades Blandas ── */
+const SoftSkills = ({ inView }) => (
+  <div className="softskills-section">
+    <h3 className={`skills-heading ${inView ? 'skills-heading--visible' : ''}`}
+        style={{ animationDelay: '400ms' }}>
+      Habilidades Blandas
+    </h3>
+    <div className="softskills-grid">
+      {habilidadesBlandas.map(({ name, desc }, i) => (
+        <div
+          key={name}
+          className={`flip-card ${inView ? 'flip-card--visible' : ''}`}
+          style={{ animationDelay: `${450 + i * 70}ms` }}
+        >
+          <div className="flip-card-inner">
+            <div className="flip-card-front"><span>{name}</span></div>
+            <div className="flip-card-back"><span>{desc}</span></div>
+          </div>
         </div>
-    );
-};
+      ))}
+    </div>
+    <p className="softskills-hint">Pasa el cursor sobre cada tarjeta</p>
+  </div>
+);
 
 export { Habilidades, SoftSkills };

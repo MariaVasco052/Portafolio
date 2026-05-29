@@ -1,18 +1,36 @@
-/* Aqui organizo los estilos generales de todo mi proyecto */
-html, body {
-  margin: 0;
-  font-family: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: black; /* Imagen de fondo */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh; /* Para ocupar toda la pantalla */
-  color: white; /* Color de texto */
+/* ════════════════════════════════════════════════════
+   index.css — Estilos base globales
+   Las variables de color, fuentes y tema están en App.css
+════════════════════════════════════════════════════ */
+
+html {
+  scroll-behavior: smooth;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+
+  /* La fuente base la define --font-body cargada en App.css.
+     Este fallback aplica solo si Google Fonts no carga. */
+  font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Color de fondo del tema oscuro */
+  background-color: #060d1a; /* mismo valor que --bg-primary en App.css */
+  color: #e2ecf4;            /* mismo valor que --text-primary */
+
+  /* min-height en lugar de height para permitir scroll */
+  min-height: 100vh;
+}
+
+/* Elemento <code> fuera de componentes — usa la mono del tema */
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: 'JetBrains Mono', source-code-pro, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Evita scroll horizontal por elementos desbordados */
+* {
+  box-sizing: border-box;
 }
