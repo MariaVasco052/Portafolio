@@ -57,7 +57,7 @@ function Sobremi() {
 
         {/* Columna CV */}
         <div className="about-hv">
-          <div className="about-hv-icon" aria-hidden="true">🧪</div>
+          <div className="about-hv-icon" aria-hidden="true">📋</div>
           <h3 className="hv">Mi Hoja<br />de Vida</h3>
           <a href="/documents/HojaDeVida.pdf" download className="btn-download">
             ↓ Descargar CV
