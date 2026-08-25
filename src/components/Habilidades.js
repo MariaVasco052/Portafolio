@@ -8,7 +8,7 @@ import '../styles/habilidades.css';
 ───────────────────────────────────────────────────────── */
 const categorias = [
   {
-    titulo: '🧪 Automatización de Pruebas',
+    titulo: '⚡️ Automatización de Pruebas',
     skills: [
       { name: 'Selenium',    img: 'selenium.png' },
       { name: 'Java',        img: 'java-icon.png' },
@@ -104,7 +104,7 @@ const Habilidades = () => {
                 style={{ animationDelay: `${(ci * 100) + i * 60}ms` }}
               >
                 <img
-                  src={`/icons/${img}`}
+                  src={`${process.env.PUBLIC_URL}/icons/${img}`}
                   alt={name}
                   className={`skill-card-icon ${['serenity.png', 'maven.png'].includes(img) ? 'skill-card-icon--larger' : ''}`}
                   loading="lazy"
