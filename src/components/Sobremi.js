@@ -59,7 +59,7 @@ function Sobremi() {
         <div className="about-hv">
           <div className="about-hv-icon" aria-hidden="true">📋</div>
           <h3 className="hv">Mi Hoja<br />de Vida</h3>
-          <a href="/documents/HojaDeVida.pdf" download className="btn-download">
+          <a href={`${process.env.PUBLIC_URL}/documents/HojaDeVida.pdf`} download className="btn-download">
             ↓ Descargar CV
           </a>
           <div className="about-hv-stats">

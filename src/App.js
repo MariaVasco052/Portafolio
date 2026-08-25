@@ -48,7 +48,7 @@ function App() {
               Automatización con · Karate · Selenium · Serenity BDD ·
             </p>
             <div className="hero-actions">
-              <a href="/documents/HojaDeVida.pdf" download className="btn-primary">
+              <a href={`${process.env.PUBLIC_URL}/documents/HojaDeVida.pdf`} download className="btn-primary">
                 ↓ Descargar CV
               </a>
               <a href="#about" className="btn-outline">
