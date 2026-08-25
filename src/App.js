@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles/App.css';
 import Navbar from './components/Navbar';
 import FotoHV from './images/FotoHV.png';

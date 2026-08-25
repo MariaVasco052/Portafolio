@@ -44,7 +44,7 @@ function Navbar() {
       {/* Emoji centrado decorativo */}
       <div className="navbar-center-emoji" aria-hidden="true">👩‍💻</div>
       {/* Links escritorio */}
-      <ul className="navbar-links" role="list">
+      <ul className="navbar-links">
         {NAV_LINKS.map(({ label, href }) => (
           <li key={href}>
             <a
