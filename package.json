@@ -2,6 +2,7 @@
   "name": "mi-portafolio",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://mariavasco052.github.io/Portafolio",
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "bootstrap": "^5.3.3",
